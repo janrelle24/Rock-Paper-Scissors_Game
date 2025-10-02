@@ -7,17 +7,22 @@
 }
 :root{
     --default-color: #b9bab8;
+    --dark-color: #212121;
+    --text-color: white;
+    --verydark-color: #0a0a0a;
 }
 body{
     
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: var(--default-color);
+
 }
 .container{
     display: block;
     justify-content: center;
     align-items: center;
-    background-color: white;
+    background-color: var(--dark-color);
+    color: var(--text-color);
     margin-top: 150px;
     margin-left: auto;
     margin-right: auto;
@@ -41,3 +46,63 @@ h1{
     margin-bottom: 30px;
     padding: 10px;
 }
+h2{
+    padding: 5px;
+}
+.main-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 10px;
+    background-color: #545252
+}
+.choice{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    padding: 20px;
+    border-radius: 10px;
+    font-size: 80px;
+    margin: 0 15px;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+    cursor: pointer;
+}
+.choice i{
+    color: #f1c27d;
+}
+.choice i:hover{
+    color: #e0ac69;
+}
+.choice span{
+    font-size: 15px;
+    margin-top: 10px;
+}
+.choice:hover {
+    transform: scale(1.1);
+    background-color: var(--verydark-color);
+}
+
+.result{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 20px;
+    padding: 15px 20px;
+    background-color: #222;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 20px;
+    font-weight: bold;
+    gap: 30px;
+}
+.result p{
+    margin: 0;
+    padding: 10px 20px;
+    border-radius: 8px;
+}
+
