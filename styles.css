@@ -50,8 +50,8 @@ h2{
     padding: 5px;
 }
 .main-container{
-    /*display: none;*/
-    display: flex;
+    display: none;
+    /*display: flex; */
     justify-content: center;
     align-items: center;
     margin-top: 20px;
@@ -62,7 +62,7 @@ h2{
     background-color: #545252;
 }
 .battle-container{
-    display: none;
+    /*display: none;*/
     justify-content: center;
     align-items: center;
     margin-top: 20px;
@@ -84,10 +84,18 @@ h2{
     justify-content: space-around;
     align-items: center;
     gap: 50px;
+    margin-top: 20px;
 }
 .area{
     font-size: 100px;
     margin: 0;
+}
+.area.left i{
+    transform: rotate(90deg);
+}
+.area.right i{
+    transform: rotate(-90deg) scaleX(-1);
+    
 }
 
 .area i{
