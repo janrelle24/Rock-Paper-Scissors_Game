@@ -157,3 +157,26 @@ h2{
 .show{
     display: block !important;
 }
+
+/*left-hand Animation*/
+@keyframes wave-left{
+    0%   { transform: rotate(90deg) }
+    25%  { transform: rotate(98deg) }
+    50%  { transform: rotate(82deg) }
+    75%  { transform: rotate(98deg) }
+    100% { transform: rotate(90deg) }
+}
+/*right-hand Animation*/
+@keyframes wave-right{
+    0%   { transform: rotate(-90deg) scaleX(-1) }
+    25%  { transform: rotate(-98deg) scaleX(-1) }
+    50%  { transform: rotate(-82deg) scaleX(-1) }
+    75%  { transform: rotate(-98deg) scaleX(-1) }
+    100% { transform: rotate(-90deg) scaleX(-1) }
+}
+.animate-wave-left{
+    animation: wave-left 0.6s ease-in-out;
+}
+.animate-wave-right{
+    animation: wave-right 0.6s ease-in-out;
+}
