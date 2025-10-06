@@ -11,6 +11,8 @@ const playerHand = document.getElementById("player-hand");
 const computerHand = document.getElementById("computer-hand");
 
 const resultText = document.querySelector(".result-text");
+const playAgainBtn = document.getElementById("play-again");
+const playAgainContainer = document.querySelector(".play-again-container");
 
 const winCountEl = document.getElementById("win-count");
 const loseCountEl = document.getElementById("lose-count");
@@ -45,12 +47,18 @@ function getComputerChoice(){
 
 function playRound(playerChoice){
     mainContainer.classList.add("hide");
+    battleContainer.classList.remove("hide");
     battleContainer.classList.add("show");
+
+    // hide play again button initially
+    playAgainContainer.classList.remove("show");
 
     //reset both hands to fist
     playerHand.innerHTML = `<i class="fa-solid fa-hand-back-fist"></i>`;
     computerHand.innerHTML = `<i class="fa-solid fa-hand-back-fist"></i>`;
     resultText.textContent = "Ready...";
+    resultText.textContent = "Go...";
+    resultText.textContent = "Fight!...";
 
     //animate both hands
     animateWave(playerHand, "left");
@@ -73,6 +81,11 @@ function playRound(playerChoice){
 
         //call function to determine the winner
         checkWinner(playerChoice, computerChoice.id);
+
+        //show play again button
+        setTimeout(() =>{
+            playAgainContainer.classList.add("show");
+        }, 500);
     },1000);
     
 
@@ -91,18 +104,28 @@ function checkWinner(player, computer){
         (player === "scissors" && computer === "paper")
     ){
         winCount++;
-        result = "You Win!";
+        result = "Congrats, you win!";
     }
     else{
         loseCount++;
-        result = "You Lose!";
+        result = "You Lost!";
     }
 
     resultText.textContent = result;
     winCountEl.textContent = winCount;
     loseCountEl.textContent = loseCount;
     drawCountEl.textContent = drawCount;
+
 }
+//Reset Game
+playAgainBtn.addEventListener("click", () =>{
+    battleContainer.classList.remove("show");
+    mainContainer.classList.remove("hide");
+    playAgainContainer.classList.remove("show");
+    resultText.textContent = "";
+    //
+    
+});
 //add event listerners
 rockBtn.addEventListener("click", () => playRound("rock"));
 paperBtn.addEventListener("click", () => playRound("paper"));

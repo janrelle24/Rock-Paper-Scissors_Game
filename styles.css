@@ -163,6 +163,39 @@ h2{
     text-align: center;
     font-weight: bold;;
 }
+.play-again-container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+.play-again-container.show {
+    opacity: 1;
+    visibility: visible;
+}
+.show.play-again-container {
+    display: flex !important;
+}
+
+#play-again{
+    font-size: 18px;
+    padding: 10px 20px;
+    background-color: #ffcc00; 
+    color: #000; 
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+#play-again:hover{
+    background-color: #ffaa00;
+    transform: scale(1.05);
+}
 
 /*left-hand Animation*/
 @keyframes wave-left{
