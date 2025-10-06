@@ -22,6 +22,9 @@ const drawCountEl = document.getElementById("draw-count");
 let winCount = 0;
 let loseCount = 0;
 let drawCount = 0;
+let matchOver = false;
+
+const WIN_LIMIT = 3;
 
 const choices = [
     {id: "rock", icon: "fa-solid fa-hand-back-fist", label: "Rock"},
@@ -46,6 +49,8 @@ function getComputerChoice(){
 }
 
 function playRound(playerChoice){
+    if(matchOver) return true; //stop the game if match already ended
+
     mainContainer.classList.add("hide");
     battleContainer.classList.remove("hide");
     battleContainer.classList.add("show");
@@ -59,6 +64,7 @@ function playRound(playerChoice){
     resultText.textContent = "Ready...";
     resultText.textContent = "Go...";
     resultText.textContent = "Fight!...";
+    resultText.textContent = "Rock... Paper... Scissors...";
 
     //animate both hands
     animateWave(playerHand, "left");
@@ -104,7 +110,7 @@ function checkWinner(player, computer){
         (player === "scissors" && computer === "paper")
     ){
         winCount++;
-        result = "Congrats, you win!";
+        result = "You win this round!";
     }
     else{
         loseCount++;
@@ -116,13 +122,38 @@ function checkWinner(player, computer){
     loseCountEl.textContent = loseCount;
     drawCountEl.textContent = drawCount;
 
+    //check if match is over
+    if(winCount === WIN_LIMIT || loseCount === WIN_LIMIT){
+        matchOver = true;
+        setTimeout(() =>{
+            if(winCount === WIN_LIMIT){
+                resultText.textContent = "🎉Congrats, You won the match!";
+            }else{
+                resultText.textContent ="💻 Sorry, Computer won the match!";
+            }
+            playAgainContainer.classList.add("show");
+        }, 800);
+    }
+
 }
 //Reset Game
 playAgainBtn.addEventListener("click", () =>{
+    if(matchOver){
+        matchOver = false;
+        winCount = 0;
+        loseCount = 0;
+        drawCount = 0;
+
+        winCountEl.textContent = "0";
+        loseCountEl.textContent = "0";
+        drawCountEl.textContent = "0";
+    }
+    
+
     battleContainer.classList.remove("show");
     mainContainer.classList.remove("hide");
     playAgainContainer.classList.remove("show");
-    resultText.textContent = "";
+    resultText.textContent = "Ready...";
     //
     
 });
