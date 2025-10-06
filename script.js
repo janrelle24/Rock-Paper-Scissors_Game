@@ -18,6 +18,10 @@ const winCountEl = document.getElementById("win-count");
 const loseCountEl = document.getElementById("lose-count");
 const drawCountEl = document.getElementById("draw-count");
 
+const matchModal = document.getElementById("match-modal");
+const matchResultText = document.getElementById("match-result");
+const restartMatchBtn = document.getElementById("restart-match");
+
 
 let winCount = 0;
 let loseCount = 0;
@@ -110,11 +114,11 @@ function checkWinner(player, computer){
         (player === "scissors" && computer === "paper")
     ){
         winCount++;
-        result = "You win this round!";
+        result = "You won this round!";
     }
     else{
         loseCount++;
-        result = "You Lost!";
+        result = "You lost this round!";
     }
 
     resultText.textContent = result;
@@ -131,32 +135,46 @@ function checkWinner(player, computer){
             }else{
                 resultText.textContent ="💻 Sorry, Computer won the match!";
             }
-            playAgainContainer.classList.add("show");
+            //playAgainContainer.classList.add("show");
+            //show modal
+            matchModal.classList.add("show");
         }, 800);
     }
 
 }
+//restart match
+restartMatchBtn.addEventListener("click", () =>{
+    matchModal.classList.remove("show");
+    resetGame();
+});
 //Reset Game
 playAgainBtn.addEventListener("click", () =>{
-    if(matchOver){
-        matchOver = false;
-        winCount = 0;
-        loseCount = 0;
-        drawCount = 0;
-
-        winCountEl.textContent = "0";
-        loseCountEl.textContent = "0";
-        drawCountEl.textContent = "0";
-    }
     
+    if(!matchOver){
+        battleContainer.classList.remove("show");
+        mainContainer.classList.remove("hide");
+        playAgainContainer.classList.remove("show");
+        resultText.textContent = "Ready...";
+    }
+});
+
+//Reset game fully after match over
+function resetGame(){
+    matchOver = false;
+    winCount = 0;
+    loseCount = 0;
+    drawCount = 0;
+
+    winCountEl.textContent = "0";
+    loseCountEl.textContent = "0";
+    drawCountEl.textContent = "0";
 
     battleContainer.classList.remove("show");
     mainContainer.classList.remove("hide");
     playAgainContainer.classList.remove("show");
     resultText.textContent = "Ready...";
-    //
-    
-});
+}
+
 //add event listerners
 rockBtn.addEventListener("click", () => playRound("rock"));
 paperBtn.addEventListener("click", () => playRound("paper"));
