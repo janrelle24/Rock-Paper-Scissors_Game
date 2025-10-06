@@ -157,6 +157,12 @@ h2{
 .show{
     display: block !important;
 }
+.result-text{
+    font-size: 24px;
+    margin-top: 10px;
+    text-align: center;
+    font-weight: bold;;
+}
 
 /*left-hand Animation*/
 @keyframes wave-left{

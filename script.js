@@ -10,6 +10,13 @@ const computerArea = document.querySelector(".area.right");
 const playerHand = document.getElementById("player-hand");
 const computerHand = document.getElementById("computer-hand");
 
+const resultText = document.querySelector(".result-text");
+
+const winCountEl = document.getElementById("win-count");
+const loseCountEl = document.getElementById("lose-count");
+const drawCountEl = document.getElementById("draw-count");
+
+
 let winCount = 0;
 let loseCount = 0;
 let drawCount = 0;
@@ -43,6 +50,7 @@ function playRound(playerChoice){
     //reset both hands to fist
     playerHand.innerHTML = `<i class="fa-solid fa-hand-back-fist"></i>`;
     computerHand.innerHTML = `<i class="fa-solid fa-hand-back-fist"></i>`;
+    resultText.textContent = "Ready...";
 
     //animate both hands
     animateWave(playerHand, "left");
@@ -70,6 +78,31 @@ function playRound(playerChoice){
 
 }
 
+function checkWinner(player, computer){
+    let result = "";
+
+    if(player === computer){
+        drawCount++;
+        result = "It's a Draw!";
+    }
+    else if(
+        (player === "rock" && computer === "scissors") ||
+        (player === "paper" && computer === "rock") ||
+        (player === "scissors" && computer === "paper")
+    ){
+        winCount++;
+        result = "You Win!";
+    }
+    else{
+        loseCount++;
+        result = "You Lose!";
+    }
+
+    resultText.textContent = result;
+    winCountEl.textContent = winCount;
+    loseCountEl.textContent = loseCount;
+    drawCountEl.textContent = drawCount;
+}
 //add event listerners
 rockBtn.addEventListener("click", () => playRound("rock"));
 paperBtn.addEventListener("click", () => playRound("paper"));
