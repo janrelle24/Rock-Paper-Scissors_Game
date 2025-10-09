@@ -22,6 +22,21 @@ const matchModal = document.getElementById("match-modal");
 const matchResultText = document.getElementById("match-result");
 const restartMatchBtn = document.getElementById("restart-match");
 
+//const bgMusic = document.getElementById("bg-music");
+const clickSound = document.getElementById("click-sound");
+const punchSound = document.getElementById("punch-sound");
+const winSound = document.getElementById("win-sound");
+const loseSound = document.getElementById("lose-sound");
+const drawSound = document.getElementById("draw-sound");
+
+//volume settings
+//bgMusic.volume = 0.3;
+clickSound.volume = 0.5;
+punchSound.volume = 0.7;
+winSound.volume = 0.9;
+loseSound.volume = 0.9;
+drawSound.volume = 0.7;
+
 
 let winCount = 0;
 let loseCount = 0;
@@ -35,6 +50,10 @@ const choices = [
     {id: "paper", icon: "fa-solid fa-hand", label: "Paper"},
     {id: "scissors", icon: "fa-solid fa-hand-peace", label: "Scissors"}
 ];
+//play background music
+/**document.body.addEventListener("click", () =>{
+    if(bgMusic.pause) bgMusic.play();
+}, { once: true });**/
 
 //animate wave function
 function animateWave(element, side) {
@@ -74,6 +93,9 @@ function playRound(playerChoice){
     animateWave(playerHand, "left");
     animateWave(computerHand, "right");
 
+    //play punch sound
+    setTimeout(() => punchSound.play(), 500);
+
     //get computer choice
     const computerChoice = getComputerChoice();
 
@@ -107,6 +129,7 @@ function checkWinner(player, computer){
     if(player === computer){
         drawCount++;
         result = "It's a Draw!";
+        drawSound.play();
     }
     else if(
         (player === "rock" && computer === "scissors") ||
@@ -115,10 +138,12 @@ function checkWinner(player, computer){
     ){
         winCount++;
         result = "You won this round!";
+        winSound.play();
     }
     else{
         loseCount++;
         result = "You lost this round!";
+        loseSound.play();
     }
 
     resultText.textContent = result;
@@ -132,8 +157,10 @@ function checkWinner(player, computer){
         setTimeout(() =>{
             if(winCount === WIN_LIMIT){
                 resultText.textContent = "🎉Congrats, You won the match!";
+                winSound.play();
             }else{
                 resultText.textContent ="💻 Sorry, Computer won the match!";
+                loseSound.play();
             }
             //playAgainContainer.classList.add("show");
             //show modal
@@ -176,6 +203,6 @@ function resetGame(){
 }
 
 //add event listerners
-rockBtn.addEventListener("click", () => playRound("rock"));
-paperBtn.addEventListener("click", () => playRound("paper"));
-scissorsBtn.addEventListener("click", () => playRound("scissors"));
+rockBtn.addEventListener("click", () => { clickSound.play(); playRound("rock") });
+paperBtn.addEventListener("click", () => { clickSound.play(); playRound("paper") });
+scissorsBtn.addEventListener("click", () => { clickSound.play(); playRound("scissors") });
